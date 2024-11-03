@@ -2,11 +2,11 @@ import aiohttp
 
 from utils import consts
 from typing import Iterable
-from domains.post import Post
+from domains.post import PostRecord
 from repositories.ipost_repository import IPostRepository
 
 class PostRepository(IPostRepository):
-    async def get_all_posts(self) -> Iterable[Post] | None:
+    async def get_all_posts(self) -> Iterable[PostRecord] | None:
         all_posts = await self.get_posts_json()
         parsed_posts = await self._parse_posts(all_posts)
 
@@ -20,5 +20,5 @@ class PostRepository(IPostRepository):
 
                 return await response.json()
 
-    async def _parse_posts(self, posts: Iterable[dict]) -> Iterable[Post]:
-        return [Post(userId=record.get("userId"), id=record.get("id"), title=record.get('title'), body=record.get("body")) for record in posts]
+    async def _parse_posts(self, posts: Iterable[dict]) -> Iterable[PostRecord]:
+        return [PostRecord(userId=record.get("userId"), id=record.get("id"), title=record.get('title'), body=record.get("body")) for record in posts]

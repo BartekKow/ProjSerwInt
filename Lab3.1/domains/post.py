@@ -1,7 +1,7 @@
 from dataclasses import dataclass
 
 @dataclass
-class Post:
+class PostRecord:
     userId: int
     id: int
     title: str
