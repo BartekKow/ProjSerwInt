@@ -1,4 +1,8 @@
 from abc import ABC
+from typing import Iterable
+
+from domains.post import PostRecord
+
 
 class IPostService(ABC):
 
@@ -14,6 +18,12 @@ class IPostService(ABC):
     async def get_posts_by_body(self, body: str) -> str:
         pass
 
+    async def sort_by_last_accessed(self) -> Iterable[PostRecord]:
+        pass
+
+    async def clean_old_posts(self, seconds: int) -> None:
+        pass
+
 
 class ICommentService(ABC):
 
@@ -27,4 +37,7 @@ class ICommentService(ABC):
         pass
 
     async def get_comments_by_body(self, body: str) -> str:
+        pass
+
+    async def get_posts_by_author(self, body: str) -> str:
         pass

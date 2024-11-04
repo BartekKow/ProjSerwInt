@@ -10,22 +10,20 @@ from services.service import CommentService
 class Container(containers.DeclarativeContainer):
     config = providers.Configuration()
 
-    repository = providers.Singleton(
+    post_repository = providers.Singleton(
         PostRepository,
     )
 
-
-    service = providers.Factory(
+    post_service = providers.Factory(
         PostService,
-        repository=repository,
+        repository=post_repository,
     )
 
-    C_repository = providers.Singleton(
+    comment_repository = providers.Singleton(
         CommentRepository,
     )
 
-
-    C_service = providers.Factory(
+    comment_service = providers.Factory(
         CommentService,
-        repository=C_repository,
+        repository=comment_repository,
     )
